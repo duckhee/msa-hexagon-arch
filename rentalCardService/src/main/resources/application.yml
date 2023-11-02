@@ -23,13 +23,8 @@ spring:
     console:
       enable: true
       path: /h2-console
-springdoc:
-  api-docs:
-    path: :/**
-  packagesToScan:
-    - kr.co.won
-  swagger-ui:
-    path: /docs
+
+
 
 
 server:
