@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: RentalCardService
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  profiles:
+    active: default
+
+  datasource:
+    url: jdbc:h2:mem:rentalTestDB
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      format_sql: true
+
+  h2:
+    console:
+      enable: true
+      path: /h2-console
+springdoc:
+  api-docs:
+    path: :/**
+  packagesToScan:
+    - kr.co.won
+  swagger-ui:
+    path: /docs
+
+
+server:
+  port: 8081
+
+logging:
+  level:
+    org.hibernate.sql: debug
+
