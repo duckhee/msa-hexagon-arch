@@ -1,0 +1,28 @@
+package kr.co.won.rentalcardservice.domain.model.vo;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class LateFee {
+
+    private long point;
+
+    private LateFee addPoint(long point) {
+        return new LateFee(this.point + point);
+    }
+
+    private LateFee removePoint(long point) {
+        if (point > this.point) {
+            throw new IllegalArgumentException("보유한 포인트보다 커서 삭감할 수 없습니다.");
+        }
+        return new LateFee(this.point - point);
+    }
+
+    public static LateFee createLateFee() {
+        return new LateFee(0);
+    }
+}
