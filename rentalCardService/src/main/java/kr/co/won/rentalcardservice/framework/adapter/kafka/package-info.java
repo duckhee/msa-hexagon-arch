@@ -1,1 +1,0 @@
-package kr.co.won.rentalcardservice.framework.adapter.kafka;
