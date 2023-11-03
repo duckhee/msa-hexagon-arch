@@ -2,6 +2,7 @@ package kr.co.won.rentalcardservice.domain.model;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
+import jakarta.persistence.Table;
 import kr.co.won.rentalcardservice.domain.model.vo.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
+@Table(name = "tbl_rental_item")
 public class RentalItem {
 
     @Embedded

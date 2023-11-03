@@ -1,9 +1,6 @@
 package kr.co.won.rentalcardservice.domain.model;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import kr.co.won.rentalcardservice.domain.model.vo.*;
 import lombok.*;
 
@@ -17,6 +14,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "tbl_rental_card")
 public class RentalCard {
 
     @EmbeddedId
@@ -25,15 +23,18 @@ public class RentalCard {
     @Embedded
     private IDName member;
 
+    @Enumerated(EnumType.STRING)
     private RentalStatus rentalStatus;
 
     @Embedded
     private LateFee lateFee;
 
     @ElementCollection
+    @JoinTable(name = "tbl_rental_item")
     private List<RentalItem> rentalItems = new ArrayList<>();
 
     @ElementCollection
+    @JoinTable(name = "tbl_return_item")
     private List<ReturnItem> returnItems = new ArrayList<>();
 
     private void addRentalItem(RentalItem rentalItem) {

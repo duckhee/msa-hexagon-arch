@@ -22,6 +22,6 @@ public class RentalCardJpaAdapter implements RentalCardOutputPort {
 
     @Override
     public RentalCard save(RentalCard rentalCard) {
-        return RentalCardOutputPort.super.save(rentalCard);
+        return rentalCardRepository.save(rentalCard);
     }
 }
