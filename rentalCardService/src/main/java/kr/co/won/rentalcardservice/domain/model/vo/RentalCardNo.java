@@ -1,16 +1,21 @@
 package kr.co.won.rentalcardservice.domain.model.vo;
 
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RentalCardNo {
+@Embeddable
+public class RentalCardNo implements Serializable {
+
+    private static final long serialVersionUID = -1107520421081907987L;
 
     private String no;
 

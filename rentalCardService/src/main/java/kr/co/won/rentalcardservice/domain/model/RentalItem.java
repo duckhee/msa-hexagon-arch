@@ -1,5 +1,7 @@
 package kr.co.won.rentalcardservice.domain.model;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 import kr.co.won.rentalcardservice.domain.model.vo.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +12,10 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Embeddable
 public class RentalItem {
 
+    @Embedded
     private Item item;
 
     // 대여일

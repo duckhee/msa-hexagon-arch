@@ -1,5 +1,9 @@
 package kr.co.won.rentalcardservice.domain.model;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
 import kr.co.won.rentalcardservice.domain.model.vo.*;
 import lombok.*;
 
@@ -8,22 +12,28 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class RentalCard {
 
+    @EmbeddedId
     private RentalCardNo rentalCardNo;
 
+    @Embedded
     private IDName member;
 
     private RentalStatus rentalStatus;
 
+    @Embedded
     private LateFee lateFee;
 
+    @ElementCollection
     private List<RentalItem> rentalItems = new ArrayList<>();
 
+    @ElementCollection
     private List<ReturnItem> returnItems = new ArrayList<>();
 
     private void addRentalItem(RentalItem rentalItem) {
