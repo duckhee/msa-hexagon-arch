@@ -26,4 +26,17 @@ public class RentalCard {
     private List<RentalItem> rentalItems = new ArrayList<>();
 
     private List<ReturnItem> returnItems = new ArrayList<>();
+
+    private void addRentalItem(RentalItem rentalItem) {
+        this.rentalItems.add(rentalItem);
+    }
+
+    private void removeRentalItem(RentalItem rentalItem) {
+        this.rentalItems.remove(rentalItem);
+    }
+
+    private void addReturnItem(ReturnItem returnItem) {
+        this.returnItems.add(returnItem);
+    }
+
 }
