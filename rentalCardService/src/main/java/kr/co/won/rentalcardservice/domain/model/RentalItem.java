@@ -1,10 +1,8 @@
 package kr.co.won.rentalcardservice.domain.model;
 
 import kr.co.won.rentalcardservice.domain.model.vo.Item;
-import kr.co.won.rentalcardservice.domain.model.vo.ReturnItem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -19,7 +17,7 @@ public class RentalItem {
     // 대여일
     private LocalDate rentDate;
 
-    public boolean overdued;
+    public boolean overdue;
 
     // 반납 예정일
     private LocalDate overdueDate;

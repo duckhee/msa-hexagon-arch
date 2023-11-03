@@ -97,7 +97,7 @@ public class RentalCard {
     // 연체 처리를 위한 함수
     public RentalCard overdueItem(Item item) {
         RentalItem rentalItem = this.rentalItems.stream().filter(i -> i.getItem().equals(item)).findFirst().get();
-        rentalItem.setOverdued(true);
+        rentalItem.setOverdue(true);
         this.rentalStatus = RentalStatus.RENT_UNAVAILABLE;
         // 연체를 생성하는 것 -> test 를 위한 코드
         rentalItem.setOverdueDate(LocalDate.now().minusDays(1));
