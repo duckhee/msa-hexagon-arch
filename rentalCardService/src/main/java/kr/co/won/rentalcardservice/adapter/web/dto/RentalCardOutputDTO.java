@@ -5,7 +5,6 @@ import lombok.*;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class RentalCardOutputDTO {
 
     private String rentalCardId;

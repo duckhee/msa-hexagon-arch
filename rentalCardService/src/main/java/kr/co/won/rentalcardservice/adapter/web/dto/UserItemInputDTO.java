@@ -9,5 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserItemInputDTO {
 
+    private String userId;
+
+    private String userName;
+
+    private Integer itemId;
+
+    private String itemTitle;
 
 }

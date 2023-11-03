@@ -56,7 +56,7 @@ public class RentalCard {
     }
 
     // 대여 처리
-    public RentalCard rentalCard(Item item) {
+    public RentalCard rentItem(Item item) {
         // rental 이 가능하지 여부를 확인하는 로직을 담고 있는 함수
         checkRentalAvailable();
         this.addRentalItem(RentalItem.createRentalItem(item));
