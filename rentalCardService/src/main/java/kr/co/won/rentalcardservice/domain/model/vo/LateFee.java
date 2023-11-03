@@ -11,11 +11,11 @@ public class LateFee {
 
     private long point;
 
-    private LateFee addPoint(long point) {
+    public LateFee addPoint(long point) {
         return new LateFee(this.point + point);
     }
 
-    private LateFee removePoint(long point) {
+    public LateFee removePoint(long point) {
         if (point > this.point) {
             throw new IllegalArgumentException("보유한 포인트보다 커서 삭감할 수 없습니다.");
         }

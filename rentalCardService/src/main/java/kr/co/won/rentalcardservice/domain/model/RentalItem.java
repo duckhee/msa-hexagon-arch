@@ -3,12 +3,13 @@ package kr.co.won.rentalcardservice.domain.model;
 import kr.co.won.rentalcardservice.domain.model.vo.Item;
 import kr.co.won.rentalcardservice.domain.model.vo.ReturnItem;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class RentalItem {
