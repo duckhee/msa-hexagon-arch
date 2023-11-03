@@ -89,7 +89,7 @@ public class RentalCard {
             // 연체료 계산
             long point = Period.between(rentalItem.getOverdueDate(), returnDate).getDays() * 10;
             // 연체료 객체 생성
-            this.lateFee.addPoint(point);
+            this.lateFee.setPoint(this.lateFee.addPoint(point).getPoint());
         }
     }
 
