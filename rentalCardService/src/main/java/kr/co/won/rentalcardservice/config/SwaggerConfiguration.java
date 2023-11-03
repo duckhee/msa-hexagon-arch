@@ -32,12 +32,11 @@ public class SwaggerConfiguration {
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
 
-                .info(new Info().title("SpringShop API")
-                        .description("Spring shop sample application")
+                .info(new Info().title("Rental Card Service")
+                        .description("book rental card service")
                         .version("v0.0.1")
-                        .license(new License().name("Apache 2.0").url("http://springdoc.org")))
+                        .license(new License().name("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0.txt")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("SpringShop Wiki Documentation")
-                        .url("https://springshop.wiki.github.org/docs"));
+                        .description("SpringShop Wiki Documentation"));
     }
 }
