@@ -19,7 +19,8 @@ public class MakeAvailableInput implements MakeAvailableUseCase {
 
     @Override
     public BookOutputDto available(Long bookNo) {
-        Book loadBook = bookOutputPort.loadBook(bookNo);
+        Book loadBook = bookOutputPort.loadBook(bookNo)
+                .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 책입니다."));;
         loadBook.makeAvailable();
         // 명시적 삽입
         Book updateBook = bookOutputPort.save(loadBook);

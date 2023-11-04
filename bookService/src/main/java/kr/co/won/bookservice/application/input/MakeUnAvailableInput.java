@@ -19,7 +19,8 @@ public class MakeUnAvailableInput implements MakeUnAvailableUseCase {
 
     @Override
     public BookOutputDto unAvailable(Long bookNo) {
-        Book loadBook = bookOutputPort.loadBook(bookNo);
+        Book loadBook = bookOutputPort.loadBook(bookNo)
+                .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 책입니다."));
         loadBook.makeUnAvailable();
         // 명시적인 로그인
         bookOutputPort.save(loadBook);

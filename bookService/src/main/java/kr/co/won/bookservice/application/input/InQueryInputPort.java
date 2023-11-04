@@ -7,6 +7,8 @@ import kr.co.won.bookservice.framework.web.dto.BookOutputDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class InQueryInputPort implements InQueryUseCase {
@@ -18,8 +20,8 @@ public class InQueryInputPort implements InQueryUseCase {
     }
 
     @Override
-    public BookOutputDto getBookInfo(long bookNo) {
-        Book loadBook = bookOutputPort.loadBook(bookNo);
-        return BookOutputDto.mapToDTO(loadBook);
+    public Optional<BookOutputDto> getBookInfo(long bookNo) {
+        Optional<BookOutputDto> bookOutputDto = bookOutputPort.loadBook(bookNo).map(BookOutputDto::mapToDTO);
+        return bookOutputDto;
     }
 }

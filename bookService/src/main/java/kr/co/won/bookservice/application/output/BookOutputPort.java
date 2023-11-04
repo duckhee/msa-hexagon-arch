@@ -3,10 +3,12 @@ package kr.co.won.bookservice.application.output;
 import kr.co.won.bookservice.domain.modal.Book;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface BookOutputPort {
 
-    default Book loadBook(long bookNo) {
+    default Optional<Book> loadBook(long bookNo) {
         return null;
     }
 
