@@ -32,7 +32,7 @@ public class Member {
         member.setPassword(password);
         member.setEmail(email);
         member.setPoint(Point.createPoint());
-        member.authorities.add(Authority.basicRole())
+        member.authorities.add(Authority.basicRole());
         return member;
     }
 
@@ -57,6 +57,6 @@ public class Member {
     }
 
     public void logout(IDName idName) {
-        
+
     }
 }
