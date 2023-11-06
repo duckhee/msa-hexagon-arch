@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MemberOutputDto {
 
+    private long memberNo;
+
     private String id;
 
     private String name;
@@ -24,6 +26,7 @@ public class MemberOutputDto {
 
     public static MemberOutputDto mapToDto(Member member) {
         MemberOutputDto memberOutputDto = new MemberOutputDto();
+        memberOutputDto.setMemberNo(member.getMemberNo());
         memberOutputDto.setId(member.getIdName().getId());
         memberOutputDto.setName(member.getIdName().getName());
         memberOutputDto.setPassword(member.getPassword().getPastPassword());
