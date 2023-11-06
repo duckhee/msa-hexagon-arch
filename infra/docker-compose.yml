@@ -1,0 +1,24 @@
+version: "2.1"
+
+networks:
+  rentalService:
+    driver: bridge
+    name: rentalService
+
+services:
+  mongoDB:
+    container_name: book-rental-service-mongodb
+    #    image: mongodb/mongodb-community-server
+    image: mongo
+    networks:
+      - rentalService
+    hostname:
+      mongoDB
+    ports:
+      - "27017:27017"
+    volumes:
+      - "./docker-file-system/mongo:/data/db"
+    logging:
+      options:
+        max_file: "3"
+        max_size: "10MB"

@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Docker System Folder ###
+infra/docker-file-system/
+infra/docker-file-system/**
