@@ -1,9 +1,13 @@
 package kr.co.won.rentalcardservice.domain.model;
 
 import jakarta.persistence.*;
+import kr.co.won.rentalcardservice.domain.model.event.ItemRented;
+import kr.co.won.rentalcardservice.domain.model.event.ItemReturned;
+import kr.co.won.rentalcardservice.domain.model.event.OverDueCleared;
 import kr.co.won.rentalcardservice.domain.model.vo.*;
 import lombok.*;
 
+import java.net.IDN;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -131,5 +135,18 @@ public class RentalCard {
             this.rentalStatus = RentalStatus.RENT_AVAILABLE;
         }
         return this.getLateFee().getPoint();
+    }
+
+    // 책을 대여를 했을 때, 발행이 되는 이벤트 생성 -> 생성에 대한 책임은 aggregate 에 있으므로 여기서 생성한다.
+    public static ItemRented createItemRentalEvent(IDName idName, Item item, long point) {
+        return new ItemRented(idName, item, point);
+    }
+
+    public static ItemReturned createItemReturnEvent(IDName idName, Item item, long point) {
+        return new ItemReturned(idName, item, point);
+    }
+
+    public static OverDueCleared createOverdueClearEvent(IDName idName, long point) {
+        return new OverDueCleared(idName, point);
     }
 }
