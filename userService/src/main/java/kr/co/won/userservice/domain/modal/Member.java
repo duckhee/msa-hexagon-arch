@@ -1,5 +1,6 @@
 package kr.co.won.userservice.domain.modal;
 
+import jakarta.persistence.*;
 import kr.co.won.userservice.domain.modal.vo.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,21 +9,29 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
+    @Embedded
     private IDName idName;
 
+    @Embedded
     private Password password;
 
+    @Embedded
     private Email email;
 
+    @ElementCollection
     private List<Authority> authorities = new ArrayList<>();
 
+    @Embedded
     private Point point;
 
 
