@@ -3,14 +3,18 @@ package kr.co.won.bestbookservice.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.UUID;
 
+@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class BestBook {
 
+    @MongoId
     private String id;
 
     private Item item;
