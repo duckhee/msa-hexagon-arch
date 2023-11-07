@@ -49,3 +49,6 @@ consumer:
     name: overdue_clear
   goupid:
     name: member
+
+kafka:
+  bootstrapAddress: localhost:9092

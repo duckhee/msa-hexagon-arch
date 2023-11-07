@@ -37,3 +37,6 @@ logging:
     org.hibernate.sql: debug
 
 
+
+kafka:
+  bootstrapAddress: localhost:9092
