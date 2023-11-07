@@ -20,8 +20,8 @@ services:
       - "./docker-file-system/mongo:/data/db"
     logging:
       options:
-        max_file: "3"
-        max_size: "10MB"
+        max-file: "3"
+        max-size: "10MB"
   zookeeper:
     image: confluentinc/cp-zookeeper
     container_name: MSA-zookeeper
@@ -32,8 +32,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     logging:
       options:
-        max_file: "3"
-        max_size: "10MB"
+        max-file: "3"
+        max-size: "10MB"
   kafka:
     image: confluentinc/cp-kafka
     container_name: MSA-kafka
@@ -50,6 +50,10 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_NUM_PARTITIONS: 4
+    logging:
+      options:
+        max-file: "3"
+        max-size: "10MB"
 
   kafka-ui:
     image: provectuslabs/kafka-ui
@@ -61,3 +65,7 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:32181
+    logging:
+      options:
+        max-file: "3"
+        max-size: "10MB"

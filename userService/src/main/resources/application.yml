@@ -47,7 +47,7 @@ consumer:
     name: rental_return
   topic3:
     name: overdue_clear
-  goupid:
+  groupid:
     name: member
 
 kafka:

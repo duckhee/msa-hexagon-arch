@@ -1,6 +1,6 @@
 spring:
   application:
-    name: RentalCardService
+    name: BookdService
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER

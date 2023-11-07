@@ -35,7 +35,7 @@ public class BookEventConsumers {
         makeUnAvailableUseCase.unAvailable(itemRented.getItem().getNo());
     }
 
-    @KafkaListener(topics = "${consumer.topic2.name}", groupId = "${consumer.groupid.name}}")
+    @KafkaListener(topics = "${consumer.topic2.name}", groupId = "${consumer.groupid.name}")
     public void consumeReturn(ConsumerRecord<String, String> recode) throws IOException {
         log.info("[kafka-consume] return_event : " + recode.value());
         //

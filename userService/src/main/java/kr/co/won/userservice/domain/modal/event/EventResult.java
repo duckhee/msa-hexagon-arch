@@ -1,5 +1,6 @@
 package kr.co.won.userservice.domain.modal.event;
 
+import kr.co.won.userservice.domain.modal.vo.IDName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
