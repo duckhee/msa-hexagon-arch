@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.won.userservice.application.usecase.SavePointUseCase;
 import kr.co.won.userservice.application.usecase.UsePointUseCase;
-import kr.co.won.userservice.domain.modal.event.ItemRented;
-import kr.co.won.userservice.domain.modal.event.ItemReturned;
-import kr.co.won.userservice.domain.modal.event.OverDueCleared;
+import kr.co.won.userservice.domain.modal.event.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -21,6 +19,7 @@ public class MemberEventConsumers {
     private final ObjectMapper objectMapper;
     private final SavePointUseCase savePointUseCase;
     private final UsePointUseCase usePointUseCase;
+
 
     public MemberEventConsumers(ObjectMapper objectMapper, SavePointUseCase savePointUseCase, UsePointUseCase usePointUseCase) {
         this.objectMapper = objectMapper;
@@ -46,7 +45,26 @@ public class MemberEventConsumers {
     public void consumeClearOverdue(ConsumerRecord<String, String> record) throws Exception {
         log.info("[kafka-consumer] clear-overdue-event : {}", record.value());
         OverDueCleared overdueEvent = objectMapper.readValue(record.value(), OverDueCleared.class);
-        usePointUseCase.userUsePoint(overdueEvent.getIdName(), overdueEvent.getPoint());
+        //
+        EventResult eventResult = new EventResult();
+        eventResult.setEventType(EventType.OVERDUE);
+        eventResult.setIdName(overdueEvent.getIdName());
+        eventResult.setPoint(overdueEvent.getPoint());
+        try{
+            usePointUseCase.userUsePoint(overdueEvent.getIdName(), overdueEvent.getPoint());
+            eventResult.setSuccess(true);
+        }catch (Exception exception){
+            log.error("[kafka-consume] use point error : {}", exception);
+        }
+    }
+
+
+    @KafkaListener(topics = "${consumer.topic4.name}", groupId = "${consumer.groupid.name}")
+    public void consumeUsePoint(ConsumerRecord<String, String> record) throws Exception {
+        log.info("[kafka-consumer] get value : {}", record.value().toString());
+        PointUseCommand pointUseCommand = objectMapper.readValue(record.value(), PointUseCommand.class);
+
+
     }
 
 }

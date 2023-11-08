@@ -39,6 +39,9 @@ logging:
   level:
     org.hibernate.sql: debug
 
+producers:
+  topic1:
+    name: rental_result
 
 consumer:
   topic1:
@@ -47,6 +50,8 @@ consumer:
     name: rental_return
   topic3:
     name: overdue_clear
+  topic4:
+    name: point_use
   groupid:
     name: member
 

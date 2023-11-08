@@ -10,7 +10,7 @@ public interface CompensationUseCase {
         return null;
     }
 
-    default RentalCard cancelRentItem(IDName idName, Item item, long point) throws Exception {
+    default RentalCard cancelReturnItem(IDName idName, Item item, long point) throws Exception {
         return null;
     }
 

@@ -39,7 +39,7 @@ public class CompensationInputPort implements CompensationUseCase {
     }
 
     @Override
-    public RentalCard cancelRentItem(IDName idName, Item item, long point) throws Exception {
+    public RentalCard cancelReturnItem(IDName idName, Item item, long point) throws Exception {
         RentalCard rentalCardResult = rentalCardOutputPort.loadRentalCard(idName.getId()).map(rentalCard -> {
                     try {
                         rentalCard.cancelReturnItem(item);
