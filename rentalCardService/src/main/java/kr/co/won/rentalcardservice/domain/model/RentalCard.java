@@ -53,6 +53,10 @@ public class RentalCard {
         this.returnItems.add(returnItem);
     }
 
+    private void removeReturnItem(ReturnItem returnItem) {
+        this.returnItems.remove(returnItem);
+    }
+
     /**
      * <p>
      * 대여 카드 생성
@@ -78,6 +82,13 @@ public class RentalCard {
         return this;
     }
 
+    // 대여 취소 처리
+    public RentalCard cancelRentItem(Item item) {
+        RentalItem rentalItem = this.rentalItems.stream().filter(i -> i.getItem().equals(item)).findFirst().get();
+        this.rentalItems.remove(rentalItem);
+        return this;
+    }
+
     // 대여가 가능한 상태인지 상태 확인하는 함수
     private void checkRentalAvailable() {
         if (this.rentalStatus == RentalStatus.RENT_UNAVAILABLE) {
@@ -95,6 +106,28 @@ public class RentalCard {
         calculateLateFee(rentalItem, returnDate);
         this.addReturnItem(ReturnItem.createReturnItem(rentalItem));
         this.removeRentalItem(rentalItem);
+        return this;
+    }
+
+    // 반납에 대한 취소 처리
+    public RentalCard cancelReturnItem(Item returnItem) {
+        ReturnItem canceldReturnItem = this.returnItems.stream().filter(item -> item.equals(returnItem)).findFirst().get();
+        // 다시 대여 처리로 변환
+        this.rentalItems.add(canceldReturnItem.getRentalItem());
+        // 대여 하는 곳에서 삭제
+        this.removeReturnItem(canceldReturnItem);
+        return this;
+    }
+
+    // 반납에 대한 취소 처리
+    public RentalCard cancelReturnItem(Item returnItem, long point) {
+        ReturnItem canceldReturnItem = this.returnItems.stream().filter(item -> item.equals(returnItem)).findFirst().get();
+        // 다시 대여 처리로 변환
+        this.rentalItems.add(canceldReturnItem.getRentalItem());
+        // 대여 하는 곳에서 삭제
+        this.removeReturnItem(canceldReturnItem);
+        // 다시 포인트를 올리고, 대여 가능 여부를 변경한다.
+        this.cancelMakeAvailableRental(point);
         return this;
     }
 
@@ -135,6 +168,13 @@ public class RentalCard {
             this.rentalStatus = RentalStatus.RENT_AVAILABLE;
         }
         return this.getLateFee().getPoint();
+    }
+
+    // 포인트만큼 연체료를 넣어주는 함수
+    public long cancelMakeAvailableRental(long point) {
+        this.setLateFee(lateFee.addPoint(point));
+        this.rentalStatus = RentalStatus.RENT_UNAVAILABLE;
+        return this.lateFee.getPoint();
     }
 
     // 책을 대여를 했을 때, 발행이 되는 이벤트 생성 -> 생성에 대한 책임은 aggregate 에 있으므로 여기서 생성한다.

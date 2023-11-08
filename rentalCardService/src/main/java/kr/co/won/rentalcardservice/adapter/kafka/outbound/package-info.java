@@ -1,0 +1,1 @@
+package kr.co.won.rentalcardservice.adapter.kafka.outbound;

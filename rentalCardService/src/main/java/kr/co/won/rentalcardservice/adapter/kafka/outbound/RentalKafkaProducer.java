@@ -1,10 +1,11 @@
-package kr.co.won.rentalcardservice.adapter.kafka;
+package kr.co.won.rentalcardservice.adapter.kafka.outbound;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.co.won.rentalcardservice.appilcation.port.out.EventOutputPort;
 import kr.co.won.rentalcardservice.domain.model.event.ItemRented;
 import kr.co.won.rentalcardservice.domain.model.event.ItemReturned;
 import kr.co.won.rentalcardservice.domain.model.event.OverDueCleared;
+import kr.co.won.rentalcardservice.domain.model.event.PointUseCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -25,14 +26,20 @@ public class RentalKafkaProducer implements EventOutputPort {
     @Value("${producers.topic3.name}")
     private String TOPIC_OVER_DUE_CLEAR;
 
+    @Value("${producers.topic4.name}")
+    private String TOPIC_POINT;
+
     private final KafkaTemplate<String, ItemRented> rentalKafka;
     private final KafkaTemplate<String, ItemReturned> returnKafka;
     private final KafkaTemplate<String, OverDueCleared> overdueClearKafka;
 
-    public RentalKafkaProducer(KafkaTemplate<String, ItemRented> rentalKafka, KafkaTemplate<String, ItemReturned> returnKafka, KafkaTemplate<String, OverDueCleared> overdueClearKafka) {
+    private final KafkaTemplate<String, PointUseCommand> pointKafkaCommand;
+
+    public RentalKafkaProducer(KafkaTemplate<String, ItemRented> rentalKafka, KafkaTemplate<String, ItemReturned> returnKafka, KafkaTemplate<String, OverDueCleared> overdueClearKafka, KafkaTemplate<String, PointUseCommand> pointKafkaCommand) {
         this.rentalKafka = rentalKafka;
         this.returnKafka = returnKafka;
         this.overdueClearKafka = overdueClearKafka;
+        this.pointKafkaCommand = pointKafkaCommand;
     }
 
     @Override
@@ -82,6 +89,20 @@ public class RentalKafkaProducer implements EventOutputPort {
             // error  발생 시 throwable
             if (throwable != null) {
                 log.error("[kafka-error]Unable to send message = [" + overDueCleared.getIdName().getId() + "] due to : " + throwable.getMessage(), throwable);
+            }
+        });
+    }
+
+    @Override
+    public void occurPointUseCommand(PointUseCommand pointUseCommand) {
+        CompletableFuture<SendResult<String, PointUseCommand>> future = pointKafkaCommand.send(TOPIC_POINT, pointUseCommand);
+        future.whenComplete((result, exception) -> {
+            if (result != null) {
+                PointUseCommand sendResult = result.getProducerRecord().value();
+                log.info("[kafka-producer] send message = [" + sendResult.toString() + "], with offset = [" + result.getRecordMetadata().offset() + "]");
+            }
+            if (exception != null) {
+                log.error("[kafka-producer] unable to send message = [" + pointUseCommand.getIdName().getId() + "] due to : {}", exception.toString());
             }
         });
     }

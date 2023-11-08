@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.co.won.rentalcardservice.domain.model.event.ItemRented;
 import kr.co.won.rentalcardservice.domain.model.event.ItemReturned;
 import kr.co.won.rentalcardservice.domain.model.event.OverDueCleared;
+import kr.co.won.rentalcardservice.domain.model.event.PointUseCommand;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,6 +19,10 @@ public interface EventOutputPort {
     }
 
     default void occurOverdueClearEvent(OverDueCleared overDueCleared) throws JsonProcessingException {
+
+    }
+
+    default void occurPointUseCommand(PointUseCommand pointUseCommand) {
 
     }
 }
