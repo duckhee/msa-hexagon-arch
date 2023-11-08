@@ -13,6 +13,9 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * consume 기능만 있을 때는 설정이 필요하지 않다.
+ */
 @Configuration
 public class KafkaConfiguration {
 
@@ -26,7 +29,7 @@ public class KafkaConfiguration {
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        return new DefaultKafkaProducerFactory<>(config);
+        return new DefaultKafkaProducerFactory(config);
     }
 
     @Bean
