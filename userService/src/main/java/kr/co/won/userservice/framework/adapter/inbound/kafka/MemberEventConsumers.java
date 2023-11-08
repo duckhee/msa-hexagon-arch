@@ -50,10 +50,10 @@ public class MemberEventConsumers {
         eventResult.setEventType(EventType.OVERDUE);
         eventResult.setIdName(overdueEvent.getIdName());
         eventResult.setPoint(overdueEvent.getPoint());
-        try{
+        try {
             usePointUseCase.userUsePoint(overdueEvent.getIdName(), overdueEvent.getPoint());
             eventResult.setSuccess(true);
-        }catch (Exception exception){
+        } catch (Exception exception) {
             log.error("[kafka-consume] use point error : {}", exception);
         }
     }
@@ -63,7 +63,7 @@ public class MemberEventConsumers {
     public void consumeUsePoint(ConsumerRecord<String, String> record) throws Exception {
         log.info("[kafka-consumer] get value : {}", record.value().toString());
         PointUseCommand pointUseCommand = objectMapper.readValue(record.value(), PointUseCommand.class);
-
+        log.info("[kafka-consumer] get command : {}", pointUseCommand.toString());
 
     }
 
