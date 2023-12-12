@@ -50,6 +50,8 @@ producers:
   topic4:
     name: point_use
 consumer:
+  groupid:
+    name: rental-card
   topic1:
     name: rental_result
   topic2:

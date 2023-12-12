@@ -30,7 +30,7 @@ public class BookController {
     @PostMapping
     public ResponseEntity<BookOutputDto> createBookResponse(@RequestBody BookInfoDto bookInfoDto) {
         BookOutputDto response = addBookUserCase.addBook(bookInfoDto);
-        URI createdUri = URI.create("/api/book/s" + response.getBookNo());
+        URI createdUri = URI.create("/api/books/" + response.getBookNo());
         return ResponseEntity.created(createdUri).body(response);
     }
 
@@ -39,6 +39,6 @@ public class BookController {
         BookOutputDto response = inQueryUseCase.getBookInfo(bookNo).orElse(null);
 //                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 책입니다."));
 
-        return response != null ?ResponseEntity.ok(response) : ResponseEntity.notFound().build();
+        return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
     }
 }
